@@ -5,9 +5,9 @@ import React from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
-import { ScrollArea } from "./ui/scroll-area";
 import { Send } from "lucide-react";
 import { Separator } from "./ui/separator";
+import Messages from "./messages";
 
 export default function ChatWrapper({ sessionId }: { sessionId: string }) {
   const { messages, handleInputChange, input, handleSubmit } = useChat({
@@ -23,19 +23,7 @@ export default function ChatWrapper({ sessionId }: { sessionId: string }) {
           <ModeToggle />
         </div>
 
-        {messages.length === 0 ? (
-          <div className="flex-1 flex items-center justify-center">
-            <h1 className="text-gray-500">No messages yet</h1>
-          </div>
-        ) : (
-          <ScrollArea className="flex-1 overflow-auto p-4 space-y-4 backdrop-blur-sm bg-background/30">
-            {/* {messages.map((msg, index) => (
-              <div key={index} className="p-2 rounded bg-background">
-              </div>
-            ))} */}
-            {JSON.stringify(messages)}
-          </ScrollArea>
-        )}
+        <Messages messages={messages} />
 
         <Separator className="my-2 bg-border/50" />
 

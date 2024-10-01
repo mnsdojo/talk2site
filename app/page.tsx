@@ -1,7 +1,8 @@
+import Herosection from "@/components/hero-section";
 import React from "react";
 
 function Page() {
-  return <div>Page</div>;
+  return <Herosection />;
 }
 
 export default Page;

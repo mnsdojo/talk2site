@@ -35,7 +35,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <main className="h-screen  text-foreground bg-background">
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>
