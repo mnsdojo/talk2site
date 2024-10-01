@@ -18,7 +18,7 @@ export default function HeroSection() {
       // Handle URL submission here
       console.log("Submitted URL:", url);
     } catch (err) {
-      console.error("Invalid URL");
+      console.error("Invalid URL", err);
     }
   };
 
