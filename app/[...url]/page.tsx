@@ -5,7 +5,6 @@ import { redis } from "@/lib/redis";
 import { formatUrl } from "@/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Suspense } from "react";
-import SessionError from "@/components/session-error";
 
 interface PageProps {
   params: {
