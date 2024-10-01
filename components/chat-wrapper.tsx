@@ -1,6 +1,6 @@
 "use client";
 
-import { useChat } from "ai/react";
+import { useChat, Message as TMessage } from "ai/react";
 import React from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -9,9 +9,16 @@ import { Send } from "lucide-react";
 import { Separator } from "./ui/separator";
 import Messages from "./messages";
 
-export default function ChatWrapper({ sessionId }: { sessionId: string }) {
+export default function ChatWrapper({
+  sessionId,
+  initialMessages,
+}: {
+  sessionId: string;
+  initialMessages: TMessage[];
+}) {
   const { messages, handleInputChange, input, handleSubmit } = useChat({
     api: "/api/chat-stream",
+    initialMessages,
     body: { sessionId },
   });
 
