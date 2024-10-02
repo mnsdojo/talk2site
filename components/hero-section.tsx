@@ -4,63 +4,66 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FormEvent, useState } from "react";
 import { ArrowRight, Globe } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
   const [url, setUrl] = useState<string>("");
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!url) return;
 
     try {
-      // Validate URL
-      new URL(url);
-      // Handle URL submission here
-      console.log("Submitted URL:", url);
+      const urlToValidate = url.startsWith("http") ? url : `https://${url}`;
+      const validated = new URL(urlToValidate);
+      const encodedUrl = encodeURIComponent(validated.toString());
+      router.push(`/${encodedUrl}`);
     } catch (err) {
-      console.error("Invalid URL", err);
+      console.error("Invalid URL:", err);
+      // Consider adding user feedback for invalid URLs
     }
   };
 
   return (
-    <section className="relative overflow-hidden py-20 lg:py-32 ">
+    <section className="relative overflow-hidden py-20 lg:py-32">
       {/* Gradients */}
       <div
         aria-hidden="true"
-        className="flex absolute -top-96 start-1/2 transform -translate-x-1/2 z-0"
+        className="absolute -top-96 start-1/2 transform -translate-x-1/2 z-0 flex"
       >
         <div className="bg-gradient-to-r from-background/50 to-background blur-3xl w-[25rem] h-[44rem] rotate-[-60deg] transform -translate-x-[10rem]" />
-        <div className="bg-gradient-to-tl blur-3xl w-[90rem] h-[50rem] rounded-full origin-top-left -rotate-12 -translate-x-[15rem] from-primary-foreground via-primary-foreground to-background" />
+        <div className="bg-gradient-to-tl from-primary-foreground via-primary-foreground to-background blur-3xl w-[90rem] h-[50rem] rounded-full origin-top-left -rotate-12 -translate-x-[15rem]" />
       </div>
 
-      <div className="container mx-auto relative z-10">
-        <div className="max-w-2xl text-center mx-auto">
-          <div className="flex items-center justify-center mb-6">
-            <Globe className="h-8 w-8 text-primary mr-2" />
+      <div className="container relative z-10 mx-auto">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="mb-6 flex items-center justify-center">
+            <Globe className="mr-2 h-8 w-8 text-primary" />
             <p className="text-2xl font-semibold text-primary">talk2site</p>
           </div>
 
-          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+          <h1 className="mb-6 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Chat with Any Website
             <br />
             Using AI
           </h1>
 
-          <p className="text-xl text-muted-foreground mb-8">
+          <p className="mb-8 text-xl text-muted-foreground">
             Enter any URL and start a conversation with the content. Get
             insights, summaries, and answers to your questions instantly.
           </p>
 
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto"
+            className="mx-auto flex max-w-xl flex-col gap-4 sm:flex-row"
           >
             <Input
               type="url"
               placeholder="Enter website URL..."
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              className="flex-grow text-lg py-6"
+              className="flex-grow py-6 text-lg"
               required
             />
             <Button type="submit" size="lg" className="whitespace-nowrap">

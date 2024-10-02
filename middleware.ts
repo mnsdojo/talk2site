@@ -15,6 +15,7 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     // Match all API routes
-    "/api/:path*",
+    "/",
+    "//:path",
   ],
 };
