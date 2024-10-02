@@ -14,6 +14,7 @@ interface ButtonCodeblockProps {
 }
 function CodeDisplayBlock({ code, lang }: ButtonCodeblockProps) {
   const [isCopied, setisCopied] = useState(false);
+  console.log(lang);
   const copyToClipboard = () => {
     navigator.clipboard.writeText(code);
     setisCopied(true);

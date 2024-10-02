@@ -5,7 +5,7 @@ import React from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
-import { Loader, Loader2, Send } from "lucide-react";
+import { Loader, Send } from "lucide-react";
 import { Separator } from "./ui/separator";
 import Messages from "./messages";
 
