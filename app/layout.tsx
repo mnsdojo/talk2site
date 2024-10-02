@@ -36,9 +36,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* <main className="h-screen  text-foreground bg-background">
-            {children}
-          </main> */}
           {children}
           <Toaster />
         </ThemeProvider>
