@@ -56,14 +56,14 @@ export default function HeroSection() {
 
           <form
             onSubmit={handleSubmit}
-            className="mx-auto flex max-w-xl flex-col gap-4 sm:flex-row"
+            className="mx-auto flex flex-col gap-4 sm:flex-row px-4 sm:px-6"
           >
             <Input
               type="url"
               placeholder="Enter website URL..."
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              className="flex-grow py-6 text-lg"
+              className=" py-6 text-lg  "
               required
             />
             <Button type="submit" size="lg" className="whitespace-nowrap">
