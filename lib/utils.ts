@@ -9,6 +9,5 @@ export function formatUrl(urlComponents: string[]) {
   const url = urlComponents
     .map((component) => decodeURIComponent(component))
     .join("/");
-  console.log("url", url);
   return url;
 }

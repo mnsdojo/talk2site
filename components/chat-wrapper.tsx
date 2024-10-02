@@ -5,7 +5,7 @@ import React from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
-import { Send } from "lucide-react";
+import { Loader, Loader2, Send } from "lucide-react";
 import { Separator } from "./ui/separator";
 import Messages from "./messages";
 
@@ -16,11 +16,12 @@ export default function ChatWrapper({
   sessionId: string;
   initialMessages: TMessage[];
 }) {
-  const { messages, handleInputChange, input, handleSubmit } = useChat({
-    api: "/api/chat-stream",
-    initialMessages,
-    body: { sessionId },
-  });
+  const { isLoading, messages, handleInputChange, input, handleSubmit } =
+    useChat({
+      api: "/api/chat-stream",
+      initialMessages,
+      body: { sessionId },
+    });
 
   return (
     <div className="flex flex-col h-screen">
@@ -42,8 +43,12 @@ export default function ChatWrapper({
               value={input}
               onChange={handleInputChange}
             />
-            <Button size="icon" type="submit">
-              <Send className="h-4 w-4" />
+            <Button disabled={isLoading} size="icon" type="submit">
+              {isLoading ? (
+                <Loader className=" h-4 w-4 animate-spin" />
+              ) : (
+                <Send className="h-4 w-4" />
+              )}
             </Button>
           </form>
         </div>

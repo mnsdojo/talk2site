@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
+import { marked } from "marked";
 import { Bot, User } from "lucide-react";
 import React from "react";
+import CodeDisplayBlock from "./code-display-block";
 
 interface MessageProps {
   content: string;
@@ -32,9 +34,24 @@ function Message({ content, isUserMessage }: MessageProps) {
               {isUserMessage ? "You" : "Website"}
             </span>
           </div>
-          <p className="text-sm py-2 text-gray-800 dark:text-gray-300">
-            {content}
-          </p>
+          <div className="text-sm py-2 text-gray-800 dark:text-gray-300">
+            {content.split("```").map((part, index) => {
+              if (index % 2 === 0) {
+                return (
+                  <span
+                    key={index}
+                    dangerouslySetInnerHTML={{ __html: marked.parse(part) }}
+                  ></span>
+                );
+              } else {
+                return (
+                  <pre key={index} className="whitespace-pre-wrap">
+                    <CodeDisplayBlock code={part} lang="" />
+                  </pre>
+                );
+              }
+            })}
+          </div>
         </div>
       </div>
     </div>
